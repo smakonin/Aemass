@@ -1,0 +1,342 @@
+# Aemass.world - swarms in a petri dish
+# Authors: Stephen Makonin
+# $Id$
+
+include "pioneer.inc"
+include "map.inc"
+include "sick.inc"
+
+speedup -1
+threads 7
+paused 0
+resolution 0.02
+
+# configure the GUI window
+window
+(
+  size [ 600.000 600.000 ] # in pixels
+  scale 5            
+  rotate [ 0  0 ]
+  show_data 0          
+  show_clock 0
+  show_flags 0
+  show_blocks 1
+  show_footprints 0
+  show_grid 0
+  show_trailarrows 0
+  show_trailrise 0
+  show_trailfast 0
+  show_occupancy 0
+  pcam_on 0
+  screenshots 0
+)
+
+# load an environment bitmap
+floorplan
+(				
+  name "petri_dish"
+  size [100.000 100.000 0.800]
+  pose [0 0 0 0]
+  bitmap "empty.png"
+)
+
+define wall model
+(
+  ctrl "wall"
+  size [0.500 2.000 0.800]
+  color "gray30"
+  fiducial_return 99
+  joules -1  # provides infinite energy
+  give_watts 5000
+  alwayson 1
+)
+
+define nose model
+(
+  pose [0.300 0 -0.100 0 ] 
+  size [0.240 0.050 0.100] 
+  color "orange" 
+  obstacle_return 0
+)
+
+define baselife pioneer2dx
+(
+  sickbase
+  ( 
+    sensor(samples 32 range [0 3] fov 180 color "gray90" ) 
+  	ranger_return 2.000 
+    watts 30 
+  )  				  
+  ctrl "Aemass"
+  kjoules 1000
+  take_watts 5000 
+  fiducial( fov 360 ) 
+  nose( )
+)
+
+define drone baselife( color "red" fiducial_return 1 )
+
+define food baselife( color "green" fiducial_return 3 )
+
+food( pose [ -30 -30 0 22.012 ] )
+food( pose [ 30 30 0 -167.663 ] )
+food( pose [ 30 -30 0 15.223 ] )
+food( pose [ -30 30 0 -87.345 ] )
+
+drone( pose [ -19.337 -13.284 0 22.393 ] )
+drone( pose [ -14.701 -8.939 0 -51.613 ] )
+drone( pose [ -11.815 -7.990 0 -44.186 ] )
+drone( pose [ -25.626 -7.364 0 59.890 ] )
+drone( pose [ -21.000 -10.245 0 -121.434 ] )
+drone( pose [ -18.954 -11.125 0 140.103 ] )
+drone( pose [ -24.282 -12.291 0 107.506 ] )
+drone( pose [ -20.461 -13.349 0 -59.902 ] )
+drone( pose [ -20.653 -11.588 0 -28.167 ] )
+drone( pose [ -11.038 -18.292 0 -124.294 ] )
+drone( pose [ -17.213 -19.097 0 -167.663 ] )
+drone( pose [ -9.549 -11.696 0 -79.074 ] )
+drone( pose [ -20.035 -10.443 0 95.604 ] )
+drone( pose [ -27.696 -11.461 0 93.249 ] )
+drone( pose [ -14.830 -19.592 0 -156.315 ] )
+drone( pose [ -14.011 -8.246 0 -27.524 ] )
+drone( pose [ -17.782 -15.404 0 -170.664 ] )
+drone( pose [ -25.268 -10.085 0 68.622 ] )
+drone( pose [ -18.914 -9.001 0 118.857 ] )
+drone( pose [ -24.703 -14.786 0 135.108 ] )
+drone( pose [ -16.796 -13.805 0 -0.741 ] )
+drone( pose [ -20.962 -8.847 0 51.226 ] )
+drone( pose [ -20.112 -18.838 0 143.553 ] )
+drone( pose [ -18.071 -13.718 0 -90.493 ] )
+drone( pose [ -23.683 -8.553 0 47.561 ] )
+drone( pose [ -22.897 -14.343 0 143.105 ] )
+drone( pose [ -18.167 -23.153 0 174.298 ] )
+drone( pose [ -23.572 -10.777 0 100.311 ] )
+drone( pose [ -10.970 -9.939 0 -48.090 ] )
+drone( pose [ -16.497 -10.150 0 21.877 ] )
+drone( pose [ -16.685 -12.661 0 -154.607 ] )
+drone( pose [ -12.851 -12.095 0 -92.058 ] )
+drone( pose [ -23.007 -12.842 0 99.078 ] )
+drone( pose [ -12.690 -20.089 0 -126.639 ] )
+drone( pose [ -23.527 -16.501 0 133.017 ] )
+drone( pose [ -18.708 -21.071 0 159.546 ] )
+drone( pose [ -14.443 -21.190 0 -143.737 ] )
+drone( pose [ -13.618 -6.845 0 -11.358 ] )
+drone( pose [ -11.732 -16.296 0 -129.247 ] )
+drone( pose [ -25.447 -12.395 0 102.785 ] )
+drone( pose [ -16.153 -11.612 0 -10.071 ] )
+drone( pose [ -21.727 -7.133 0 -12.961 ] )
+drone( pose [ -20.214 -14.402 0 157.124 ] )
+drone( pose [ -19.793 -12.096 0 109.336 ] )
+drone( pose [ -21.624 -13.093 0 89.039 ] )
+drone( pose [ -21.992 -11.564 0 160.897 ] )
+drone( pose [ -12.293 -10.770 0 -73.540 ] )
+drone( pose [ -20.039 -15.594 0 -168.322 ] )
+drone( pose [ -18.954 -6.466 0 6.864 ] )
+drone( pose [ -18.594 -17.147 0 164.623 ] )
+drone( pose [ -19.774 -16.580 0 156.756 ] )
+drone( pose [ -18.979 -14.886 0 -98.932 ] )
+drone( pose [ -18.648 -12.325 0 45.670 ] )
+drone( pose [ -22.527 -9.715 0 47.516 ] )
+drone( pose [ -27.474 -9.090 0 71.179 ] )
+drone( pose [ -17.485 -7.434 0 7.067 ] )
+drone( pose [ -16.685 -22.168 0 -163.774 ] )
+drone( pose [ -22.286 -19.483 0 169.747 ] )
+drone( pose [ -15.647 -18.787 0 -170.823 ] )
+drone( pose [ -17.434 -9.320 0 -0.785 ] )
+drone( pose [ -11.539 -12.609 0 -83.635 ] )
+drone( pose [ -20.262 -22.277 0 162.198 ] )
+drone( pose [ -17.744 -11.409 0 55.910 ] )
+drone( pose [ -19.757 -3.919 0 0.919 ] )
+drone( pose [ -20.607 -20.845 0 135.450 ] )
+drone( pose [ -26.345 -13.526 0 115.811 ] )
+drone( pose [ -18.764 -19.231 0 172.599 ] )
+drone( pose [ -12.146 -9.374 0 -91.351 ] )
+drone( pose [ -18.440 -10.065 0 19.156 ] )
+drone( pose [ -16.720 -8.364 0 -24.633 ] )
+drone( pose [ -14.466 -10.418 0 -46.903 ] )
+drone( pose [ -16.899 -14.637 0 -2.320 ] )
+drone( pose [ -21.609 -17.384 0 150.586 ] )
+drone( pose [ -17.234 -16.279 0 80.029 ] )
+drone( pose [ -17.227 -17.528 0 174.341 ] )
+drone( pose [ -15.775 -15.483 0 -19.907 ] )
+drone( pose [ -15.946 -13.556 0 -58.100 ] )
+drone( pose [ -15.403 -13.151 0 70.366 ] )
+drone( pose [ -15.033 -11.169 0 -47.485 ] )
+drone( pose [ -19.772 -7.904 0 24.004 ] )
+drone( pose [ -23.625 -17.931 0 142.779 ] )
+drone( pose [ -21.839 -15.794 0 110.945 ] )
+drone( pose [ -10.185 -15.844 0 -105.028 ] )
+drone( pose [ -9.731 -17.947 0 -112.061 ] )
+drone( pose [ -9.558 -13.754 0 -94.448 ] )
+drone( pose [ -14.308 -5.667 0 -20.119 ] )
+drone( pose [ -19.006 -4.925 0 1.778 ] )
+drone( pose [ -15.572 -16.980 0 163.165 ] )
+drone( pose [ -14.565 -15.183 0 -135.218 ] )
+drone( pose [ -11.749 -14.069 0 -85.060 ] )
+drone( pose [ -16.566 -20.979 0 167.791 ] )
+drone( pose [ -23.749 -6.070 0 38.706 ] )
+drone( pose [ -13.032 -16.280 0 -104.431 ] )
+drone( pose [ -12.701 -14.766 0 -104.315 ] )
+drone( pose [ -13.793 -14.088 0 -107.655 ] )
+drone( pose [ -13.939 -12.492 0 -100.519 ] )
+drone( pose [ -14.347 -17.035 0 -129.099 ] )
+drone( pose [ -16.645 -5.369 0 -8.124 ] )
+drone( pose [ -21.429 -5.776 0 -7.776 ] )
+drone( pose [ -13.159 -17.884 0 -107.334 ] )
+
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+wall( pose [0 0 0 0] )
+
