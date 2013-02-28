@@ -29,16 +29,18 @@ Aemass is amass or swarm of robots that feed off "food" robots and
 excrete "waste" robot. The goal is to create a self-sustaining swarm
 that can live forever in the "petri dish".
 
-To read more about this project read the Aemass_Project.pdf file 
+To read more about this project read the **Aemass_Project.pdf** file 
 located in this project directory.
 
 HOW-TO INSTALL & RUN
 ---------------------
 In the Aemass dir run:
 
+```
 cmake .
 make
 stage Aemass.world
+```
 
 
 LAST WORD
